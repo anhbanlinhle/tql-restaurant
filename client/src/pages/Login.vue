@@ -8,8 +8,8 @@ const callback = (response) => {
 </script>
 
 <template>
-    <div class="w-4/5 max-[400px]:w-full relative flex flex-col justify-end items-end shadow-lg md:h-[70vh] md:max-h-[30rem] max-md:min-h-[55vh] md:min-w-[650px] md:max-w-4xl rounded-2xl bg-gradient-to-tr hover:bg-gradient-to-bl from-[#52a1f5] to-[#39c0c8]">
-        <div class="w-full px-10 py-5 space-y-6 h-full text-center flex text-white flex-col justify-center items-center max-md:hidden">
+    <div class="w-4/5 max-[400px]:w-full relative flex flex-col justify-end items-end shadow-lg h-[70vh] max-h-[35rem] md:min-w-[650px] md:max-w-4xl rounded-2xl bg-gradient-to-tr hover:bg-gradient-to-bl from-[#52a1f5] to-[#39c0c8]">
+        <div class="w-full px-10 py-5 space-y-10 h-full text-center flex text-white flex-col justify-center items-center">
             <p class="font-bold text-4xl">Welcome back</p>
             <p class="text-xl font-light">Sign in through your gmail and start your journey with us</p>
             <GoogleLogin :callback="callback">
@@ -21,6 +21,6 @@ const callback = (response) => {
                 </button>
             </GoogleLogin>
         </div>
-        <img :src="img" class="h-[13rem] absolute max-md:hidden"/>
+        <img :src="img" class="h-[13rem] absolute max-sm:hidden"/>
     </div>
 </template>
