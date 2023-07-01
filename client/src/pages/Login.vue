@@ -1,0 +1,26 @@
+<script setup>
+import img from '../assets/vector_img.svg';
+
+const callback = (response) => {
+    console.log("Handle the response", response)
+};
+
+</script>
+
+<template>
+    <div class="w-4/5 max-[400px]:w-full relative flex flex-col justify-end items-end shadow-lg md:h-[70vh] md:max-h-[30rem] max-md:min-h-[55vh] md:min-w-[650px] md:max-w-4xl rounded-2xl bg-gradient-to-tr hover:bg-gradient-to-bl from-[#52a1f5] to-[#39c0c8]">
+        <div class="w-full px-10 py-5 space-y-6 h-full text-center flex text-white flex-col justify-center items-center max-md:hidden">
+            <p class="font-bold text-4xl">Welcome back</p>
+            <p class="text-xl font-light">Sign in through your gmail and start your journey with us</p>
+            <GoogleLogin :callback="callback">
+                <button class="rounded-full flex items-center gap-x-2 font-semibold text-xl transition-all duration-300 ease-in-out px-5 py-2 border-2 border-solid border-white hover:px-6 hover:tracking-wider hover:gap-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512" class="w-6 h-6">
+                        <path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504C110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6c98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/>
+                    </svg>
+                    <p>Sign in</p>
+                </button>
+            </GoogleLogin>
+        </div>
+        <img :src="img" class="h-[13rem] absolute max-md:hidden"/>
+    </div>
+</template>
