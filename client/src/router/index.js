@@ -42,6 +42,11 @@ const router = createRouter({
           name: 'MealHistory',
           component: () => import('@/pages/UserMealHistory.vue'),
         },
+        {
+          path: 'profile',
+          name: 'UserProfile',
+          component: () => import('@/pages/UserProfile.vue'),
+        },
       ]
     },
     {
