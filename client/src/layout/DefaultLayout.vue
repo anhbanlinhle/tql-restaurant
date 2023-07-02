@@ -38,7 +38,7 @@ watch(() => route.fullPath, () => {
             ref="main"
             id="main"
             class="sticky top-0 z-0 min-h-screen transition-all duration-500 ease-in-out  sm:px-4 pb-4 overflow-x-hidden max-h-screen"
-            :class="smallBar ? 'px-2 sm:px-8 w-[calc(100%-64px)]' : 'w-0 sm:px-8 sm:w-[calc(100%-300px)]'"
+            :class="smallBar ? 'px-2 sm:px-8 w-[calc(100%-64px)] max-sm:w-full' : 'w-0 sm:px-8 sm:w-[calc(100%-240px)]'"
             @scroll="handleScroll"
         >
             <div 
@@ -48,6 +48,15 @@ watch(() => route.fullPath, () => {
                 <p class="text-xl font-bold">Dashboard</p>
                 <ProfileDropdown />
             </div>
+            <svg 
+                @click="smallBar = !smallBar"
+                v-if="smallBar"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
+                stroke-width="2" stroke="currentColor" 
+                class="w-8 h-8 fixed top-20 z-[1] rounded-r-lg shadow-md p-1.5 text-white bg-[#52a1f5] cursor-pointer sm:hidden"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+            </svg>
             <router-view v-slot="{ Component }">
                 <transition name="fade" mode="out-in">
                     <component :is="Component" />
