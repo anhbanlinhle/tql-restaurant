@@ -35,6 +35,19 @@ CREATE TABLE `available_mail` (
   `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `available_mail`
+--
+
+INSERT INTO `available_mail` (`email`) VALUES
+('21020229@vnu.edu.vn'),
+('21020644@vnu.edu.vn'),
+('21020664@vnu.edu.vn'),
+('linhyeunguyen1111@gmail.com'),
+('minhtuan3154@gmail.com'),
+('teoemga2003@gmail.com'),
+('vietlinhleviet@gmail.com');
+
 -- --------------------------------------------------------
 
 --
