@@ -1,8 +1,19 @@
 <script setup>
 import img from '../assets/vector_img.svg';
 
-const callback = (response) => {
+const callback = async (response) => {
     console.log("Handle the response", response)
+    const res = await fetch("http://localhost:2210/login", {
+        method: 'POST',
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code: response.code }),
+    })
+    if(res.error) {
+        console.log(res.error);
+    }
 };
 
 </script>
