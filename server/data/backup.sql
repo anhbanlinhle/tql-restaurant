@@ -679,6 +679,7 @@ CREATE TABLE `user` (
   `email` varchar(50) NOT NULL,
   `id` int(11) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
+  `avatar` varchar(200) DEFAULT NULL,
   `debt` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `type` tinyint(1) NOT NULL DEFAULT 0,
   `phone` varchar(20) NOT NULL,
