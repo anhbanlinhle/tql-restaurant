@@ -10,7 +10,6 @@ let verifyToken = (req, res, next) => {
     if (!req.session.userid || !req.session.email) {
       req.session.userid = verified.id
       req.session.email = verified.email
-      req.session.authority = verified.authority
       req.session.token = token
       req.user = verified
     }
