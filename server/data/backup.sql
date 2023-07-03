@@ -677,7 +677,7 @@ CREATE TABLE `pre_order` (
 
 CREATE TABLE `user` (
   `email` varchar(50) NOT NULL,
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `avatar` varchar(200) DEFAULT NULL,
   `debt` int(10) UNSIGNED NOT NULL DEFAULT 0,
