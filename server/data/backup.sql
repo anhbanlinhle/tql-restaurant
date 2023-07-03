@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 02, 2023 at 09:51 AM
+-- Generation Time: Jul 03, 2023 at 02:48 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -34,6 +34,19 @@ use `tql_restaurant`;
 CREATE TABLE `available_mail` (
   `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `available_mail`
+--
+
+INSERT INTO `available_mail` (`email`) VALUES
+('21020229@vnu.edu.vn'),
+('21020644@vnu.edu.vn'),
+('21020664@vnu.edu.vn'),
+('linhyeunguyen1111@gmail.com'),
+('minhtuan3154@gmail.com'),
+('teoemga2003@gmail.com'),
+('vietlinhleviet@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -673,6 +686,19 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`email`, `id`, `name`, `debt`, `type`, `phone`, `ssn`) VALUES
+('21020229@vnu.edu.vn', 1, 'Quang', 0, 0, '123456789', '123456789'),
+('21020644@vnu.edu.vn', 2, 'Linh', 0, 0, '123456789', '123456789'),
+('21020664@vnu.edu.vn', 3, 'Tuan', 0, 0, '123456789', '123456789'),
+('linhyeunguyen1111@gmail.com', 4, 'Linh Le', 0, 0, '123456789', '123456789'),
+('minhtuan3154@gmail.com', 5, 'Tuan Vu', 0, 0, '123456789', '123456789'),
+('teoemga2003@gmail.com', 6, 'Quang Hoang', 0, 0, '123456789', '123456789'),
+('vietlinhleviet@gmail.com', 7, 'Viet Linh', 0, 0, '123456789', '123456789');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -751,7 +777,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
