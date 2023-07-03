@@ -38,6 +38,11 @@ const router = createRouter({
           component: () => import('@/pages/WeeklyMenu.vue'),
         },
         {
+          path: 'dishes',
+          name: 'Dishes',
+          component: () => import('@/pages/AvailableDishes.vue'),
+        },
+        {
           path: 'meal-history',
           name: 'MealHistory',
           component: () => import('@/pages/UserMealHistory.vue'),
