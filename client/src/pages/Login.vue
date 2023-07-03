@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import img from '../assets/vector_img.svg';
 import ErrorCard from '../components/UI/ErrorCard.vue'
@@ -29,7 +29,7 @@ const callback = async (response) => {
             emailErrorMessage.value = dataFetched.message
         } else if (res.status === 200) {
             emailError.value = false
-            document.cookie = "token=" + dataFetched.token
+            document.cookie = "token=" + dataFetched.token + "; Secure"
             loginSuccessfully.value = true
             setTimeout(() => {
                 router.push('/')
@@ -40,6 +40,10 @@ const callback = async (response) => {
         }
     }
 };
+
+onBeforeMount(() => {
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/auth;'
+});
 
 </script>
 
