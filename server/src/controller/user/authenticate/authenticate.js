@@ -29,7 +29,7 @@ let authenticate = async (req, res) => {
       const authToken = jwt.sign(payload, process.env.SECRET, {expiresIn: '20000000000000s'})
       req.session.token = authToken
       
-      return res.send(authToken)
+      return res.send({ token: authToken })
     }
   }
   catch (err) {
