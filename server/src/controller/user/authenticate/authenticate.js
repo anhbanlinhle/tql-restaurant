@@ -9,7 +9,7 @@ let authenticate = async (req, res) => {
     let query = `select * from available_mail where email = ?`
     let result = await pool.execute(query, [userInfo.email])
     if (result[0].length === 0) {;
-      return res.status(400).send('Email has not been registered')
+      return res.status(400).send({ message: 'Email has not been registered' })
     }
     else {
       let query = `select id, name, type from user where email = ?`
