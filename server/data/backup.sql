@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 03, 2023 at 02:48 AM
+-- Generation Time: Jul 03, 2023 at 03:32 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -678,7 +678,7 @@ CREATE TABLE `pre_order` (
 CREATE TABLE `user` (
   `email` varchar(50) NOT NULL,
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
   `debt` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `type` tinyint(1) NOT NULL DEFAULT 0,
   `phone` varchar(20) NOT NULL,
@@ -690,13 +690,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`email`, `id`, `name`, `debt`, `type`, `phone`, `ssn`) VALUES
-('21020229@vnu.edu.vn', 1, 'Quang', 0, 0, '123456789', '123456789'),
-('21020644@vnu.edu.vn', 2, 'Linh', 0, 0, '123456789', '123456789'),
+('21020229@vnu.edu.vn', 1, 'Quang ngu', 0, 0, '123456789', '123456789'),
+('21020644@vnu.edu.vn', 2, '21020644 Lê Viết Việt Linh', 0, 0, '123456789', '123456789'),
 ('21020664@vnu.edu.vn', 3, 'Tuan', 0, 0, '123456789', '123456789'),
 ('linhyeunguyen1111@gmail.com', 4, 'Linh Le', 0, 0, '123456789', '123456789'),
 ('minhtuan3154@gmail.com', 5, 'Tuan Vu', 0, 0, '123456789', '123456789'),
 ('teoemga2003@gmail.com', 6, 'Quang Hoang', 0, 0, '123456789', '123456789'),
-('vietlinhleviet@gmail.com', 7, 'Viet Linh', 0, 0, '123456789', '123456789');
+('vietlinhleviet@gmail.com', 7, 'ちゃんエビ', 0, 0, '123456789', '123456789');
 
 --
 -- Indexes for dumped tables
