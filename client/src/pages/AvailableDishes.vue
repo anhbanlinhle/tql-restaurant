@@ -103,7 +103,7 @@ onMounted(() => {
                 </svg>
             </DishCategoryButton>
         </div>
-        <div class="w-full grid grid-cols-4 grid-rows-[repeat(x,max-content),1fr] gap-4 relative z-0">
+        <div class="w-full grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-rows-[repeat(x,max-content),1fr] gap-4 relative z-0">
             <DishCard 
                 v-if="foodArray.length > 0"
                 v-for="item in foodArray" 
