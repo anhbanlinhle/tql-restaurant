@@ -29,7 +29,7 @@ const callback = async (response) => {
             emailErrorMessage.value = dataFetched.message
         } else if (res.status === 200) {
             emailError.value = false
-            document.cookie = "token=" + dataFetched.token + "; Secure; SameSite=Lax; path=/auth"
+            document.cookie = "token=" + dataFetched.token + "; Secure; SameSite=Lax; path=/"
             loginSuccessfully.value = true
             setTimeout(() => {
                 router.push('/')
@@ -42,7 +42,7 @@ const callback = async (response) => {
 };
 
 onBeforeMount(() => {
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/auth;'
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 });
 
 </script>
