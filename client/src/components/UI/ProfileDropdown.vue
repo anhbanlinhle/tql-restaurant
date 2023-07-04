@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router';
 const popupShowed = ref(false);
 
 const deleteTokenCookie = () => {
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/auth;'
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 };
 </script>
 
