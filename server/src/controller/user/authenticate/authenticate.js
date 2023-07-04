@@ -30,7 +30,7 @@ let authenticate = async (req, res) => {
           type: getIdAndType.type
         }
       } else {
-        await pool.execute(`update user set name = ? where email = ?`, [userInfo.name, userInfo.email])
+        await pool.execute(`update user set name = ?, avatar = ? where email = ?`, [userInfo.name, userInfo.picture, userInfo.email])
         req.session.userid = result[0][0].id
         req.session.token = userInfo.token
         req.session.email = userInfo.email
