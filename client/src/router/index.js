@@ -38,7 +38,7 @@ const router = createRouter({
           component: () => import('@/pages/WeeklyMenu.vue'),
         },
         {
-          path: 'dishes',
+          path: 'dishes/:category?',
           name: 'Dishes',
           component: () => import('@/pages/AvailableDishes.vue'),
         },
