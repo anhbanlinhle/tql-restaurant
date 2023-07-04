@@ -37,15 +37,15 @@ watch(() => route.fullPath, () => {
         <div 
             ref="main"
             id="main"
-            class="sticky top-0 z-0 min-h-screen transition-all duration-500 ease-in-out  sm:px-4 pb-4 overflow-x-hidden max-h-screen"
+            class="relative min-h-screen transition-all duration-500 ease-in-out  sm:px-4 pb-4 overflow-x-hidden max-h-screen"
             :class="smallBar ? 'px-2 sm:px-8 w-[calc(100%-64px)] max-sm:w-full' : 'w-0 sm:px-8 sm:w-[calc(100%-240px)]'"
             @scroll="handleScroll"
         >
             <div 
-                class="sticky z-0 w-full top-0 flex items-center justify-between py-3 rounded-b-3xl transition-all duration-500 ease-in-out"
+                class="sticky z-40 w-full top-0 flex items-center justify-between py-3 rounded-b-3xl transition-all duration-500 ease-in-out"
                 :class="scrollPosition > 0 ? 'bg-[#52a1f5] text-white px-5' : 'text-[#52a1f5]'"
             >
-                <p class="text-xl font-bold">Dashboard</p>
+                <p class="text-xl font-bold">TQL Restaurant</p>
                 <ProfileDropdown />
             </div>
             <svg 
