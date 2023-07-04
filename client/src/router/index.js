@@ -33,9 +33,24 @@ const router = createRouter({
           component: () => import('@/pages/Home.vue'),
         },
         {
-          path: 'work',
-          name: 'Work',
-          component: () => import('@/pages/Work.vue'),
+          path: 'weekly-menu',
+          name: 'WeeklyMenu',
+          component: () => import('@/pages/WeeklyMenu.vue'),
+        },
+        {
+          path: 'dishes',
+          name: 'Dishes',
+          component: () => import('@/pages/AvailableDishes.vue'),
+        },
+        {
+          path: 'meal-history',
+          name: 'MealHistory',
+          component: () => import('@/pages/UserMealHistory.vue'),
+        },
+        {
+          path: 'profile',
+          name: 'UserProfile',
+          component: () => import('@/pages/UserProfile.vue'),
         },
       ]
     },

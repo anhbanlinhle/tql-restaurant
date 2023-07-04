@@ -1,7 +1,12 @@
 <script setup>
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const popupShowed = ref(false);
+
+const deleteTokenCookie = () => {
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/auth;'
+};
 </script>
 
 <template>
@@ -11,13 +16,15 @@ const popupShowed = ref(false);
         </svg>
         <Transition name="bounce">
             <div v-if="popupShowed" class="bg-white flex flex-col space-y-3 text-[#1d1d1d] p-3 rounded-lg absolute z-10 w-fit mt-12 mr-1 shadow-md">
-                <div class="flex items-center cursor-pointer space-x-2 transition-colors duration-200 ease-in-out hover:text-[#52a1f5]">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                    </svg>
-                    <p class="font-medium">Profile</p>
-                </div>
-                <RouterLink to="/auth/login">
+                <RouterLink to="/profile" @click="popupShowed = false">
+                    <div class="flex items-center cursor-pointer space-x-2 transition-colors duration-200 ease-in-out hover:text-[#52a1f5]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                        </svg>
+                        <p class="font-medium">Profile</p>
+                    </div>
+                </RouterLink>
+                <RouterLink to="/auth/login" @click="deleteTokenCookie">
                     <div class="flex items-center cursor-pointer space-x-2 transition-colors duration-200 ease-in-out hover:text-[#52a1f5]">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
@@ -37,6 +44,7 @@ const popupShowed = ref(false);
 
 .bounce-leave-active {
     animation: bounce-in 0.5s reverse;
+    transform: translate(0);
 }
 
 @keyframes bounce-in {
