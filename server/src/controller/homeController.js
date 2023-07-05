@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 import { verifyToken } from "./verifyToken"
-import { authenticate} from "./user/authenticate/authenticate"
+import { authenticate } from "../model/user/authenticate/authenticate"
 
 let homepage = async (req, res) => {
   console.log(
