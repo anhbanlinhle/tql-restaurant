@@ -16,6 +16,12 @@ const dishTypeMap = ref({
     side_dish: 'Side dish'
 })
 
+const tokenValue = document.cookie
+                    .split("; ")
+                    .find((row) => row.startsWith("token="))
+                    ?.split("=")[1];
+console.log(tokenValue);                    
+
 const foodArray = ref([])
 
 const fetchDishes = async () => {
@@ -25,6 +31,7 @@ const fetchDishes = async () => {
         credentials: "include",
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': tokenValue
         },
         body: JSON.stringify({ category: route.params.category === '' ? undefined : route.params.category })
     })
@@ -118,9 +125,9 @@ onMounted(() => {
                 v-else
                 class="w-full rounded-2xl p-2.5 shadow-md flex flex-col items-center bg-white space-y-2 animate-pulse"
             >
-                <div class="w-full h-24 rounded-2xl bg-slate-100"></div>
-                <div class="w-full h-4 rounded-2xl bg-slate-100"></div>
-                <div class="w-full h-4 rounded-2xl bg-slate-100"></div>
+                <div class="w-full h-24 rounded-2xl bg-slate-200"></div>
+                <div class="w-full h-4 rounded-2xl bg-slate-200"></div>
+                <div class="w-full h-4 rounded-2xl bg-slate-200"></div>
             </div>
         </div>
         <Modal :condition="dishInfoModalOpened" @exit-modal="dishInfoModalOpened = false">

@@ -8,7 +8,7 @@ const initWebRoute = (app) => {
   router.get('/', homeController.homepage)
   router.post('/login', homeController.authenticate)
 
-  router.post('/dishes', homeController.getAvailableDishes)
+  router.post('/dishes', verifyToken,  homeController.getAvailableDishes)
 
   return app.use('/', router)
 }

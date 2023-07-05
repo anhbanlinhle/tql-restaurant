@@ -43,8 +43,6 @@ const selectedColor = computed(() => {
     }
 })
 
-console.log(selectedColor.value);
-
 const navigateTo = () => {
     router.push(`/dishes/${props.to}`)
 };
