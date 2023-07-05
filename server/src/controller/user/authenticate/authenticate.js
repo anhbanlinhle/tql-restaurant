@@ -15,7 +15,6 @@ let authenticate = async (req, res) => {
     else {
       let query = `select id, name, type from user where email = ?`
       let result = await pool.execute(query, [userInfo.email])
-      console.log(result[0], userInfo);
       let jwtPayload;
       if (result[0].length === 0) {
         const queryToCreateNewUser = 

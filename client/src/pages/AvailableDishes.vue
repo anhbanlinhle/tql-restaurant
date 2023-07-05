@@ -45,9 +45,28 @@ const fetchDishes = async () => {
 
 const dishInfoModalOpened = ref(false)
 const selectedDishId = ref(null)
+const selectedDish = ref(null)
 const handleDishInfoModal = (dishId) => {
     dishInfoModalOpened.value = true
     selectedDishId.value = dishId
+    fetchSpecifiedDish()
+}
+
+const fetchSpecifiedDish = async () => {
+    selectedDish.value = null
+    const res = await fetch(`http://localhost:2210/dish/${selectedDishId.value}`, {
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': tokenValue
+        },
+    })
+    if (res.error) {
+        console.log(res.error);
+    }
+    const dataFetched = JSON.parse(await res.text());
+    console.log(dataFetched);
+    selectedDish.value = {...dataFetched}
 }
 
 watch(() => route.params, () => {
@@ -136,7 +155,7 @@ onMounted(() => {
                     {{ selectedDishId }}
                 </template>
                 <template #body>
-
+                    {{ selectedDish }}
                 </template>
             </ModalCard>
         </Modal>

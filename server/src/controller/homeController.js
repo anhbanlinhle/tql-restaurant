@@ -3,6 +3,7 @@ require("dotenv").config();
 import { verifyToken } from "./verifyToken"
 import { authenticate } from "./user/authenticate/authenticate"
 import { getAvailableDishes } from "./dishes/dishes"
+import { getSpecifiedDish } from "./dishes/specifiedDish"
 
 let homepage = async (req, res) => {
   console.log(
@@ -30,5 +31,5 @@ let homepage = async (req, res) => {
 module.exports = {
   homepage, verifyToken,
   authenticate,
-  getAvailableDishes
+  getAvailableDishes, getSpecifiedDish
 }
