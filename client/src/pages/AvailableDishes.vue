@@ -2,7 +2,7 @@
 import DishCategoryButton from '../components/dishes/DishCategoryButton.vue'
 import DishCard from '../components/dishes/DishCard.vue';
 import Modal from '../components/UI/Modal.vue';
-import ModalCard from '../components/UI/ModalCard.vue';
+import Button from '../components/UI/Button.vue';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -16,11 +16,33 @@ const dishTypeMap = ref({
     side_dish: 'Side dish'
 })
 
+const colorMap = ref({
+    main_dish: {
+        bg: 'bg-[#52a1f5]',
+        text: 'text-[#52a1f5]'
+    },
+    appetizer: {
+        bg: 'bg-[#39c0c8]',
+        text: 'text-[#39c0c8]'
+    },
+    side_dish: {
+        bg: 'bg-[#6c47ff]',
+        text: 'text-[#6c47ff]'
+    },
+    dessert: {
+        bg: 'bg-[#f34971]',
+        text: 'text-[#f34971]'
+    },
+    drink: {
+        bg: 'bg-[#aabb5d]',
+        text: 'text-[#aabb5d]'
+    },
+});
+
 const tokenValue = document.cookie
                     .split("; ")
                     .find((row) => row.startsWith("token="))
                     ?.split("=")[1];
-console.log(tokenValue);                    
 
 const foodArray = ref([])
 
@@ -39,15 +61,16 @@ const fetchDishes = async () => {
         console.log(res.error);
     }
     const dataFetched = JSON.parse(await res.text());
-    console.log(dataFetched);
     foodArray.value = [...dataFetched.dishes]
 };
 
 const dishInfoModalOpened = ref(false)
+const ingredientShowed = ref(false)
 const selectedDishId = ref(null)
 const selectedDish = ref(null)
 const handleDishInfoModal = (dishId) => {
     dishInfoModalOpened.value = true
+    ingredientShowed.value = false
     selectedDishId.value = dishId
     fetchSpecifiedDish()
 }
@@ -65,7 +88,6 @@ const fetchSpecifiedDish = async () => {
         console.log(res.error);
     }
     const dataFetched = JSON.parse(await res.text());
-    console.log(dataFetched);
     selectedDish.value = {...dataFetched}
 }
 
@@ -144,20 +166,55 @@ onMounted(() => {
                 v-else
                 class="w-full rounded-2xl p-2.5 shadow-md flex flex-col items-center bg-white space-y-2 animate-pulse"
             >
-                <div class="w-full h-24 rounded-2xl bg-slate-200"></div>
+                <div class="w-full pt-[75%] rounded-2xl bg-slate-200"></div>
                 <div class="w-full h-4 rounded-2xl bg-slate-200"></div>
                 <div class="w-full h-4 rounded-2xl bg-slate-200"></div>
             </div>
         </div>
         <Modal :condition="dishInfoModalOpened" @exit-modal="dishInfoModalOpened = false">
-            <ModalCard @exit-modal="dishInfoModalOpened = false">
-                <template #title>
-                    {{ selectedDishId }}
-                </template>
-                <template #body>
-                    {{ selectedDish }}
-                </template>
-            </ModalCard>
+            <div :class="colorMap[selectedDish.type].bg" class="rounded-xl overflow-hidden transition-all duration-700 ease-in-out min-w-[600px] max-w-3xl relative flex">
+                <svg @click="dishInfoModalOpened = false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 cursor-pointer absolute z-10 right-2 top-2 transition-colors duration-500 ease-in-out" :class="ingredientShowed ? 'text-white' : colorMap[selectedDish.type].text">
+                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" />
+                </svg>
+                <div class="w-full bg-white px-4 py-4 flex flex-col items-end relative gap-y-2">
+                    <p class="w-full text-center text-4xl font-semibold" :class="colorMap[selectedDish.type].text">{{ selectedDish.name }}</p>
+                    <img :src="selectedDish.img" class="rounded-xl w-full"/>
+                    <button 
+                        @click="ingredientShowed = !ingredientShowed"
+                        class="py-2 px-3 flex items-center gap-2 rounded-xl text-white group"
+                        :class="colorMap[selectedDish.type].bg"
+                    >
+                        Ingredient
+                        <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            class="icon icon-tabler icon-tabler-fish h-5 w-5 transition-transform duration-500 ease-in-out" 
+                            :class="ingredientShowed ? '-rotate-180' : ''"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" 
+                            stroke-linecap="round" stroke-linejoin="round"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M16.69 7.44a6.973 6.973 0 0 0 -1.69 4.56c0 1.747 .64 3.345 1.699 4.571"></path>
+                            <path d="M2 9.504c7.715 8.647 14.75 10.265 20 2.498c-5.25 -7.761 -12.285 -6.142 -20 2.504"></path>
+                            <path d="M18 11v.01"></path>
+                            <path d="M11.5 10.5c-.667 1 -.667 2 0 3"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="text-white transition-all duration-500 ease-in-out space-y-2 mt-2" :class="ingredientShowed ? 'w-60 px-4 pt-6' : 'w-0'">
+                    <div v-for="item in selectedDish.ingredients" :key="item" class="flex items-center space-x-1">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-fish w-4 h-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M16.69 7.44a6.973 6.973 0 0 0 -1.69 4.56c0 1.747 .64 3.345 1.699 4.571"></path>
+                                <path d="M2 9.504c7.715 8.647 14.75 10.265 20 2.498c-5.25 -7.761 -12.285 -6.142 -20 2.504"></path>
+                                <path d="M18 11v.01"></path>
+                                <path d="M11.5 10.5c-.667 1 -.667 2 0 3"></path>
+                            </svg>
+                        </div>
+                        <p class="">{{ item }}</p>
+                    </div>
+                </div>
+            </div>
         </Modal>
     </div>
 </template>
