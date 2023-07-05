@@ -2,8 +2,8 @@ require("dotenv").config();
 
 import { verifyToken } from "./verifyToken"
 import { authenticate } from "./user/authenticate/authenticate"
-import { getAvailableDishes } from "./dishes/dishes"
-import { getSpecifiedDish } from "./dishes/specifiedDish"
+import { getAvailableDishes } from "../model/dishes/dishes"
+import { getSpecifiedDish } from "../model/dishes/specifiedDish"
 
 let homepage = async (req, res) => {
   console.log(
