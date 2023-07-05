@@ -1,11 +1,18 @@
 <script setup>
 import { computed, onBeforeMount, onMounted, onUnmounted, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import Navbar from '../components/UI/Navbar.vue';
 import ProfileDropdown from '../components/UI/ProfileDropdown.vue'
 
-const smallBar = ref(false)
 const route = useRoute()
+const router = useRouter()
+
+const cookieValue = document.cookie
+                    .split("; ")
+                    .find((row) => row.startsWith("token="))
+                    ?.split("=")[1];
+
+const smallBar = ref(false)
 
 const main = ref()
 const scrollPosition = ref(0)
@@ -17,6 +24,9 @@ const handleScroll = () => {
 window.addEventListener('scroll', handleScroll)
 
 onBeforeMount(() => {
+    if(cookieValue === undefined) {
+        router.push('/auth/login')
+    }
     if(window.innerWidth <= 640) {
         smallBar.value = true
     }
