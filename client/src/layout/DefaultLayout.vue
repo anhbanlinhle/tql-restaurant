@@ -1,16 +1,18 @@
 <script setup>
-import { computed, onBeforeMount, onMounted, onUnmounted, ref, watch } from 'vue';
+import { onBeforeMount, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Navbar from '../components/UI/Navbar.vue';
 import ProfileDropdown from '../components/UI/ProfileDropdown.vue'
+import Modal from '../components/UI/Modal.vue'
 
 const route = useRoute()
 const router = useRouter()
 
-const cookieValue = document.cookie
+const cookieValue = ref(document.cookie
                     .split("; ")
                     .find((row) => row.startsWith("token="))
-                    ?.split("=")[1];
+                    ?.split("=")[1]);
+let cookieValueUpdater
 
 const smallBar = ref(false)
 
@@ -24,7 +26,7 @@ const handleScroll = () => {
 window.addEventListener('scroll', handleScroll)
 
 onBeforeMount(() => {
-    if(cookieValue === undefined) {
+    if(cookieValue.value === undefined) {
         router.push('/auth/login')
     }
     if(window.innerWidth <= 640) {
@@ -32,12 +34,29 @@ onBeforeMount(() => {
     }
 });
 
+onMounted(() => {
+    cookieValueUpdater = setInterval(() => {
+        cookieValue.value = document.cookie
+                    .split("; ")
+                    .find((row) => row.startsWith("token="))
+                    ?.split("=")[1];
+    }, 10000);
+})
+
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
+    clearInterval(cookieValueUpdater)
 });
 
 watch(() => route.fullPath, () => {
     main.value.scrollTop = 0
+});
+
+watch(cookieValue, () => {
+    if(cookieValue.value === undefined) {
+        alert('Out of session! Please log in again!')
+        router.push('/auth/login')
+    }
 });
 </script>
 
@@ -73,6 +92,7 @@ watch(() => route.fullPath, () => {
                 </transition>
             </router-view>
         </div>
+        
     </div>
 </template>
 
