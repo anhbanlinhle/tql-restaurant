@@ -1,6 +1,6 @@
 import pool from '../../../config/connectDB';
 import jwt from 'jsonwebtoken'
-import { verifyCode } from '../../../model/verifyOAuth'
+import { verifyCode } from '../../verifyOAuth'
 
 
 let authenticate = async (req, res) => {
