@@ -58,7 +58,7 @@ onMounted(() => {
             <p class="text-3xl font-medium text-gray-600"><span class="font-bold text-[#39c0c8]">Available</span> dishes</p>
         </div>
         <div class="w-full flex items-center space-x-4 overflow-x-scroll py-2">
-            <DishCategoryButton name="Appetizer" to="appetizer">
+            <DishCategoryButton name="Appetizer" to="appetizer" color="success">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-salad w-9 h-9" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M4 11h16a1 1 0 0 1 1 1v.5c0 1.5 -2.517 5.573 -4 6.5v1a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-1c-1.687 -1.054 -4 -5 -4 -6.5v-.5a1 1 0 0 1 1 -1z"></path>
@@ -68,7 +68,7 @@ onMounted(() => {
                     <path d="M13 11v-.5a2.5 2.5 0 1 0 -5 0v.5"></path>
                 </svg>
             </DishCategoryButton>
-            <DishCategoryButton name="Main dish" to="main-dish">
+            <DishCategoryButton name="Main dish" to="main-dish" color="primary">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-meat w-9 h-9" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M13.62 8.382l1.966 -1.967a2 2 0 1 1 3.414 -1.415a2 2 0 1 1 -1.413 3.414l-1.82 1.821"></path>
@@ -77,14 +77,14 @@ onMounted(() => {
                     <path d="M12.975 21.425c3.905 -3.906 4.855 -9.288 2.121 -12.021c-2.733 -2.734 -8.115 -1.784 -12.02 2.121"></path>
                 </svg>
             </DishCategoryButton>
-            <DishCategoryButton name="Side dish" to="side-dish">
+            <DishCategoryButton name="Side dish" to="side-dish" color="neon">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-egg-fried w-9 h-9" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
                     <path d="M14 3a5 5 0 0 1 4.872 6.13a3 3 0 0 1 .178 5.681a3 3 0 1 1 -4.684 3.626a5 5 0 1 1 -8.662 -5a5 5 0 1 1 4.645 -8.856a4.982 4.982 0 0 1 3.651 -1.585z"></path>
                 </svg>
             </DishCategoryButton>
-            <DishCategoryButton name="Dessert" to="dessert">
+            <DishCategoryButton name="Dessert" to="dessert" color="red">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lemon w-9 h-9" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M17.536 3.393c3.905 3.906 3.905 10.237 0 14.143c-3.906 3.905 -10.237 3.905 -14.143 0l14.143 -14.143"></path>
@@ -94,7 +94,7 @@ onMounted(() => {
                     <path d="M10.464 10.464h6.364"></path>
                 </svg>
             </DishCategoryButton>
-            <DishCategoryButton name="Drink" to="drink">
+            <DishCategoryButton name="Drink" to="drink" color="celery">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bottle w-9 h-9" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M10 5h4v-2a1 1 0 0 0 -1 -1h-2a1 1 0 0 0 -1 1v2z"></path>

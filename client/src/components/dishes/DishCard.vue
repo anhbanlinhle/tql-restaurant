@@ -1,6 +1,30 @@
 <script setup>
+import { computed } from 'vue';
+
 const props = defineProps(['imgSrc', 'dishName', 'dishType', 'id']);
 const emits = defineEmits(['openModal']);
+
+const colorOption = {
+    primary: 'text-[#52a1f5] font-bold',
+    success: 'text-[#39c0c8] font-bold',
+    neon: 'text-[#6c47ff] font-bold',
+    red: 'text-[#f34971] font-bold',
+    celery: 'text-[#aabb5d] font-bold',
+};
+
+const selectedColor = computed(() => {
+    if (props.dishType === 'Appetizer') {
+        return colorOption.success
+    } else if (props.dishType === 'Main dish') {
+        return colorOption.primary
+    } else if (props.dishType === 'Side dish') {
+        return colorOption.neon
+    } else if (props.dishType === 'Dessert') {
+        return colorOption.red
+    } else {
+        return colorOption.celery
+    }
+});
 
 </script>
 
@@ -11,7 +35,7 @@ const emits = defineEmits(['openModal']);
         <img :src="imgSrc" class="w-full rounded-2xl"/>
         <div class="w-full">
             <div class="w-full flex justify-between">
-                <p class="text-[#39c0c8] font-bold">{{ dishType }}</p>
+                <p :class="selectedColor">{{ dishType }}</p>
                 <svg 
                     @click="$emit('openModal', id)"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
