@@ -3,11 +3,11 @@ import pool from '../../config/connectDB';
 const getAvailableDishes = async (req, res) => {
     try {
         let dishes, queryToGetDishes
-        if(req.body.category === undefined) {
+        if(req.query.category === undefined) {
             queryToGetDishes = 'SELECT * FROM dish';
             dishes = await pool.execute(queryToGetDishes);
         } else {
-            const cate = req.body.category.replace('-', '_');
+            const cate = req.query.category.replace('-', '_');
             queryToGetDishes = `SELECT * FROM dish WHERE type = ?`
             dishes = await pool.execute(queryToGetDishes, [cate])
         }

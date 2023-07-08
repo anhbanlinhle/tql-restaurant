@@ -4,6 +4,7 @@ import { verifyToken } from "./verifyToken"
 import { authenticate } from "../model/user/authenticate/authenticate"
 import { getAvailableDishes } from "../model/dishes/dishes"
 import { getSpecifiedDish } from "../model/dishes/specifiedDish"
+import { findDish } from "../model/dishes/findDish"
 
 let homepage = async (req, res) => {
   console.log(
@@ -31,5 +32,5 @@ let homepage = async (req, res) => {
 module.exports = {
   homepage, verifyToken,
   authenticate,
-  getAvailableDishes, getSpecifiedDish
+  getAvailableDishes, getSpecifiedDish, findDish
 }

@@ -3,7 +3,8 @@ import DishCategoryButton from '../components/dishes/DishCategoryButton.vue'
 import DishCard from '../components/dishes/DishCard.vue';
 import Modal from '../components/UI/Modal.vue';
 import Button from '../components/UI/Button.vue';
-import { onMounted, ref, watch } from 'vue';
+import SearchBar from '../components/UI/SearchBar.vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
@@ -45,17 +46,22 @@ const tokenValue = document.cookie
                     ?.split("=")[1];
 
 const foodArray = ref([])
+const category = computed(() => {
+    if(route.params.category === '') {
+        return '';
+    } else {
+        return `?category${route.params.category}`
+    }
+})
 
 const fetchDishes = async () => {
     foodArray.value = []
-    const res = await fetch('http://localhost:2210/dishes', {
-        method: 'POST',
+    const res = await fetch(`http://localhost:2210/dishes${category.value}`, {
         credentials: "include",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': tokenValue
         },
-        body: JSON.stringify({ category: route.params.category === '' ? undefined : route.params.category })
     })
     if (res.error) {
         console.log(res.error);
@@ -91,6 +97,17 @@ const fetchSpecifiedDish = async () => {
     selectedDish.value = {...dataFetched}
 }
 
+const inputDishName = ref(null)
+let inputTimeout
+const findDish = () => {
+    console.log('finding');
+}
+
+watch(inputDishName, () => {
+    clearTimeout(inputTimeout);
+    inputTimeout = setTimeout(findDish, 2000);
+})
+
 watch(() => route.params, () => {
     fetchDishes()
 })
@@ -102,8 +119,9 @@ onMounted(() => {
 
 <template>
     <div class="w-full">
-        <div class="w-full">
+        <div class="w-full flex max-sm:flex-col max-sm:space-y-2 justify-between sm:items-center">
             <p class="text-3xl font-medium text-gray-600"><span class="font-bold text-[#39c0c8]">Available</span> dishes</p>
+            <SearchBar v-model="inputDishName" placeholder="Find a dish..." @enter="findDish"/>
         </div>
         <div class="w-full flex items-center space-x-4 overflow-x-scroll py-2">
             <DishCategoryButton name="Appetizer" to="appetizer" color="success">
