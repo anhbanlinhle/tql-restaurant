@@ -43,10 +43,6 @@ const selectedColor = computed(() => {
     }
 })
 
-const navigateTo = () => {
-    router.push(`/dishes/${props.to}`)
-};
-
 const matchingParam = computed(() => {
     if(route.params.category === props.to) {
         return true
@@ -54,6 +50,15 @@ const matchingParam = computed(() => {
         return false
     }
 });
+
+const navigateTo = () => {
+    if(matchingParam.value) {
+        router.push(`/dishes`)
+    } else {
+        router.push(`/dishes/${props.to}`)
+    }
+};
+
 </script>
 
 <template>
