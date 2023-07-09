@@ -47,16 +47,32 @@ const tokenValue = document.cookie
 
 const foodArray = ref([])
 const category = computed(() => {
-    if(route.params.category === '') {
+    if(route.params.category === '' || route.params.category === undefined) {
         return '';
     } else {
-        return `?category${route.params.category}`
+        return `category=${route.params.category}`
     }
 })
 
+const inputDishName = ref(null)
+const nameParam = computed(() => {
+    if(inputDishName.value === null || inputDishName.value === '') {
+        return ''
+    } else {
+        return `name=${inputDishName.value}`
+    }
+})
+let inputTimeout
+
+const param = computed(() => {
+    return '?' + category.value + '&' + nameParam.value;
+})
+const loading = ref(false);
+
 const fetchDishes = async () => {
+    loading.value = true
     foodArray.value = []
-    const res = await fetch(`http://localhost:2210/dishes${category.value}`, {
+    const res = await fetch(`http://localhost:2210/dishes${param.value}`, {
         credentials: "include",
         headers: {
             'Content-Type': 'application/json',
@@ -68,6 +84,7 @@ const fetchDishes = async () => {
     }
     const dataFetched = JSON.parse(await res.text());
     foodArray.value = [...dataFetched.dishes]
+    loading.value = false
 };
 
 const dishInfoModalOpened = ref(false)
@@ -75,8 +92,6 @@ const ingredientShowed = ref(false)
 const selectedDishId = ref(null)
 const selectedDish = ref(null)
 const handleDishInfoModal = (dishId) => {
-    dishInfoModalOpened.value = true
-    ingredientShowed.value = false
     selectedDishId.value = dishId
     fetchSpecifiedDish()
 }
@@ -95,17 +110,13 @@ const fetchSpecifiedDish = async () => {
     }
     const dataFetched = JSON.parse(await res.text());
     selectedDish.value = {...dataFetched}
-}
-
-const inputDishName = ref(null)
-let inputTimeout
-const findDish = () => {
-    console.log('finding');
+    dishInfoModalOpened.value = true
+    ingredientShowed.value = false
 }
 
 watch(inputDishName, () => {
     clearTimeout(inputTimeout);
-    inputTimeout = setTimeout(findDish, 2000);
+    inputTimeout = setTimeout(fetchDishes, 2000);
 })
 
 watch(() => route.params, () => {
@@ -121,7 +132,7 @@ onMounted(() => {
     <div class="w-full">
         <div class="w-full flex max-sm:flex-col max-sm:space-y-2 justify-between sm:items-center">
             <p class="text-3xl font-medium text-gray-600"><span class="font-bold text-[#39c0c8]">Available</span> dishes</p>
-            <SearchBar v-model="inputDishName" placeholder="Find a dish..." @enter="findDish"/>
+            <SearchBar v-model="inputDishName" placeholder="Find a dish..."/>
         </div>
         <div class="w-full flex items-center space-x-4 overflow-x-scroll py-2">
             <DishCategoryButton name="Appetizer" to="appetizer" color="success">
@@ -181,13 +192,16 @@ onMounted(() => {
                 @open-modal="handleDishInfoModal"
             />
             <div
-                v-else
+                v-else-if="foodArray.length === 0 && loading"
                 class="w-full rounded-2xl p-2.5 shadow-md flex flex-col items-center bg-white space-y-2 animate-pulse"
             >
                 <div class="w-full pt-[75%] rounded-2xl bg-slate-200"></div>
                 <div class="w-full h-4 rounded-2xl bg-slate-200"></div>
                 <div class="w-full h-4 rounded-2xl bg-slate-200"></div>
             </div>
+            <p v-else-if="foodArray.length === 0 && !loading" class="text-xl font-semibold text-red-500 mt-4">
+                No result found
+            </p>
         </div>
         <Modal :condition="dishInfoModalOpened" @exit-modal="dishInfoModalOpened = false">
             <div :class="colorMap[selectedDish.type].bg" class="rounded-xl overflow-hidden transition-all duration-700 ease-in-out min-w-[600px] max-w-3xl relative flex">
