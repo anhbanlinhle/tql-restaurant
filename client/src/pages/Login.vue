@@ -29,7 +29,7 @@ const callback = async (response) => {
             emailErrorMessage.value = dataFetched.message
         } else if (res.status === 200) {
             emailError.value = false
-            document.cookie = "token=" + dataFetched.token + "; Secure"
+            document.cookie = "token=" + dataFetched.token + "; Secure; SameSite=Lax; path=/"
             loginSuccessfully.value = true
             setTimeout(() => {
                 router.push('/')
@@ -42,7 +42,7 @@ const callback = async (response) => {
 };
 
 onBeforeMount(() => {
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/auth;'
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 });
 
 </script>
@@ -51,8 +51,10 @@ onBeforeMount(() => {
     <div class="w-full flex justify-center">
         <Checkmark :condition="loginSuccessfully"/>
         <ErrorCard :opened="emailError" :message="emailErrorMessage" @close="emailError = false"/>
-        <div class="w-4/5 max-[400px]:w-full relative flex flex-col justify-end items-end shadow-lg h-[70vh] max-h-[35rem] md:min-w-[650px] md:max-w-4xl rounded-2xl bg-gradient-to-tr hover:bg-gradient-to-bl from-[#52a1f5] to-[#39c0c8]">
-            <div class="w-full px-10 py-5 space-y-10 h-full text-center flex text-white flex-col justify-center items-center">
+        <div 
+            class="w-4/5 max-[400px]:w-full relative flex flex-col justify-end items-end shadow-lg h-[70vh] max-h-[35rem] md:min-w-[650px] md:max-w-4xl rounded-2xl bg-gradient-to-tr from-[#52a1f5] to-[#39c0c8] before:content-[''] before:absolute before:top-0 before:right-0 before:w-full before:h-full before:bg-gradient-to-bl before:from-[#52a1f5] before:to-[#39c0c8] before:opacity-0 before:transition-opacity before:duration-300 before:rounded-2xl before:hover:opacity-100"
+        >
+            <div class="w-full px-10 py-5 space-y-10 h-full text-center flex text-white flex-col justify-center items-center relative">
                 <p class="font-bold text-4xl">Welcome back</p>
                 <p class="text-xl font-light">Sign in through your gmail and start your journey with us</p>
                 <GoogleLogin :callback="callback">
