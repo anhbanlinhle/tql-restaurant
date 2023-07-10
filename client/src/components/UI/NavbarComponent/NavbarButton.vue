@@ -35,7 +35,7 @@ const moveTo = () => {
 
                 <slot></slot>
             </div>
-            <p class="font-semibold text-base ml-2 relative py-4 mt-0.5 whitespace-nowrap">{{ content }}</p>
+            <p class="font-bold text-base ml-2 relative py-4 mt-0.5 whitespace-nowrap">{{ content }}</p>
         </div>
     </div>
 </template>
