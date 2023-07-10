@@ -39,11 +39,13 @@ const deleteTokenCookie = () => {
 
 <style scoped>
 .bounce-enter-active {
-    animation: bounce-in 0.5s;
+    animation: bounce-in 0.7s;
+    transform-origin: top right;
 }
 
 .bounce-leave-active {
-    animation: bounce-in 0.5s reverse;
+    animation: bounce-in 0.7s reverse;
+    transform-origin: top right;
     transform: translate(0);
 }
 
