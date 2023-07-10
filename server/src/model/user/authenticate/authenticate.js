@@ -2,10 +2,8 @@ import pool from '../../../config/connectDB';
 import jwt from 'jsonwebtoken'
 import { verifyCode } from '../../verifyOAuth'
 
-
 let authenticate = async (req, res) => {
   try {
-    console.log(req.body.code);
     let userInfo = await verifyCode(req.body.code)
     let query = `select * from available_mail where email = ?`
     let result = await pool.execute(query, [userInfo.email])
